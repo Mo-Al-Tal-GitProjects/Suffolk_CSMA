@@ -7,3 +7,5 @@ Repository for Suffolk University's Computational Science and Math Club
 - Nasruddin Mohamed
 - Andrew Yuen
 - Kyle Erhabor
+- Ava Guidet
+- Jada Pressat
