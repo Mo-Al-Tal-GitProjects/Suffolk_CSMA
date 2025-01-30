@@ -6,3 +6,4 @@ Repository for Suffolk University's Computational Science and Math Club
 - Mohammed Khodor Firas Al-Tal
 - Nasruddin Mohamed
 - Andrew Yuen
+- Kyle Erhabor
