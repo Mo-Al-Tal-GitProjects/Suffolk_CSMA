@@ -9,3 +9,4 @@ Repository for Suffolk University's Computational Science and Math Club
 - Kyle Erhabor
 - Ava Guidet
 - Jada Pressat
+- Endi Fejzollari
