@@ -14,3 +14,4 @@ Repository for Suffolk University's Computational Science and Math Club
 - Sarmad Shah
 - Kanan Guliyev
 - Ria Chudasama
+- Anthony Sek
