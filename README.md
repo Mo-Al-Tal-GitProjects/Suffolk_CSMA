@@ -11,3 +11,4 @@ Repository for Suffolk University's Computational Science and Math Club
 - Jada Pressat
 - Endi Fejzollari
 - Montasir Moyen
+- Sarmad Shah
