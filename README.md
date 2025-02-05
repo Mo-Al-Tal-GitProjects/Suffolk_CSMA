@@ -10,3 +10,4 @@ Repository for Suffolk University's Computational Science and Math Club
 - Ava Guidet
 - Jada Pressat
 - Endi Fejzollari
+- Montasir Moyen
