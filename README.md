@@ -12,3 +12,4 @@ Repository for Suffolk University's Computational Science and Math Club
 - Endi Fejzollari
 - Montasir Moyen
 - Sarmad Shah
+- Kanan Guliyev
