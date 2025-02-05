@@ -13,3 +13,4 @@ Repository for Suffolk University's Computational Science and Math Club
 - Montasir Moyen
 - Sarmad Shah
 - Kanan Guliyev
+- Ria Chudasama
