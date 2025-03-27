@@ -18,3 +18,4 @@ Repository for Suffolk University's Computational Science and Math Club
 - Margulan Kudaibergen
 - Bexultan Abila
 - Yunus Abdurahman
+- Allan Nguyen
