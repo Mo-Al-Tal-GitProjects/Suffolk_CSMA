@@ -1,5 +1,5 @@
-# Suffolk CSM
-Repository for Suffolk University's Computational Science and Math Club  
+# Suffolk CSMA
+Repository for Suffolk University's Computational Science and Mathematics Association
 
 ## Members:
 
