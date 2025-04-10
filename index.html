@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Suffolk University Interactive Campus Map</title>
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     </head>
     <body>
         <!-- Navbar -->
         <nav class="navbar">
             <img src="Suffolk_University_coat_of_arms.svg" alt="Suffolk University Logo" class="logo">
         </nav>
-
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-content">
@@ -24,13 +25,12 @@
                 </div>
             </div>
         </section>
-
         <!-- Main Content -->
         <main class="container">
             <!-- Map Preview -->
             <section class="map-preview">
                 <h2>Campus Map Overview</h2>
-                <div class="map-image-wrapper">
+                <div id="map" class="map-image-wrapper">
                     <img src="map-preview.jpg" alt="Campus Map Preview">
                 </div>
             </section>
@@ -42,20 +42,17 @@
                     <h3>Dining Areas</h3>
                     <p>Discover all campus dining options with live menu updates</p>
                 </article>
-
                 <article class="feature-card">
                     <i class="fas fa-users"></i>
                     <h3>Club Meetings</h3>
                     <p>Find meeting locations and event schedules</p>
                 </article>
-
                 <article class="feature-card">
                     <i class="fas fa-building"></i>
                     <h3>Academic Facilities</h3>
                     <p>Navigate to classrooms and lecture halls effectively</p>
                 </article>
             </section>
-
             <!-- Action Buttons -->
             <div class="action-buttons">
                 <button class="btn primary">View Live Map</button>
@@ -64,7 +61,6 @@
                 <button class="btn outline">Get Directions</button>
             </div>
         </main>
-
         <!-- Footer -->
         <footer class="footer">
             <div class="footer-content">
