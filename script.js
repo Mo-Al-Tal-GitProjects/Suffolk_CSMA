@@ -35,13 +35,3 @@ document.querySelectorAll('.btn').forEach(button => {
 //         });
 //     });
 // });
-
-// Map
-
-// Rosalie K. Stahl Center: 73 Tremont Street, Boston, Massachusetts
-const map = L.map("map").setView([42.357813, -71.061027], 18)
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
-})
-.addTo(map);

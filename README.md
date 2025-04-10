@@ -1,4 +1,5 @@
 # Suffolk CSMA
+
 Repository for Suffolk University's Computational Science and Mathematics Association
 
 ## Members:
