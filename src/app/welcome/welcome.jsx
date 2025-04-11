@@ -5,6 +5,57 @@ import "leaflet/dist/leaflet.css";
 export function Welcome() {
   // Rosalie K. Stahl Center: 73 Tremont Street, Boston, Massachusetts
   const coordinates = [42.357813, -71.061027];
+  const clubs = [
+    {
+      name: "Computational Science and Mathematics Association"
+    },
+    {
+      name: "Computer Science Club"
+    },
+    {
+      name: "Math Society"
+    },
+  ];
+
+  // https://www.suffolk.edu/visit/campus-map-directions
+  const locations = [
+    {
+      name: "Rosalie K. Stahl Center"
+    },
+    {
+      name: "One Beacon Street"
+    },
+    {
+      name: "Nathan R. Miller Residence Hall",
+    },
+    {
+      name: "Frank Sawyer Building",
+    },
+    {
+      name: "Ridgeway Building"
+    },
+    {
+      name: "22 Beacon Street",
+    },
+    {
+      name: "David J. Sargent Hall"
+    },
+    {
+      name: "Michael S. & Larry E. Smith Residence Hall"
+    },
+    {
+      name: "Modern Theatre & Residence Hall"
+    },
+    {
+      name: "Athletics Fields"
+    },
+    {
+      name: "Leonard J. Samia Academic Center"
+    },
+    {
+      name: "Mildred F. Sawyer Library"
+    },
+  ]
 
   return (
     <div>
@@ -24,13 +75,47 @@ export function Welcome() {
       <main className="container">
         <section className="map-preview">
           <h2>Campus Map Overview</h2>
-          {/* .leaflet-container doesn't seem to be part of the public API */}
-          <MapContainer className="map-container"
-                        center={coordinates}
-                        zoom={18}>
-            <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          </MapContainer>
+          <div className="map-wrapper">
+            {/* .leaflet-container doesn't seem to be part of the public API */}
+            <MapContainer className="map-container"
+                          center={coordinates}
+                          zoom={18}>
+              <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            </MapContainer>
+            <div className="map-overlay">
+              <div className="map-overlay-controls">
+                <div className="dropdown">
+                  <button className="btn btn-primary dropdown-toggle"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false">
+                    Clubs
+                  </button>
+                  <ul className="dropdown-menu">
+                    {clubs.map((club) => (
+                      <li className="dropdown-item" key={club.name}>
+                        {club.name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="dropdown">
+                  <button className="btn btn-secondary dropdown-toggle"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false">
+                    Locations
+                  </button>
+                  <ul className="dropdown-menu" id="locDropdownMenu">
+                    {locations.map((location) => (
+                      <li className="dropdown-item" key={location.name}>
+                        {location.name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
         <section className="features-grid">
           <article className="feature-card">
