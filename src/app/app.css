@@ -286,3 +286,9 @@ body {
   border-end-end-radius: 10px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
+
+.marker-popup-clubs {
+  padding-inline-start: 0;
+  list-style: disc inside;
+
+}
