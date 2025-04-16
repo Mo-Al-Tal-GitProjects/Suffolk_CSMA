@@ -93,7 +93,7 @@ const locations = [
   },
 ];
 
-function MapClubs({ clubs }) {
+function CampusMapClubs({ clubs }) {
   if (clubs.length === 0) {
     return null;
   }
@@ -112,14 +112,14 @@ function MapClubs({ clubs }) {
   )
 }
 
-function Map({ locations, selectedLocation }) {
+function CampusMap({ locations, selectedLocation }) {
   const map = useMap();
-  const markers = useRef({});
+  const markers = useRef(new Map());
 
   useEffect(() => {
     if (selectedLocation) {
       map.flyTo(selectedLocation);
-      markers.current[selectedLocation].openPopup();
+      markers.current.get(selectedLocation).openPopup();
     }
   }, [map, selectedLocation, markers]);
 
@@ -128,14 +128,14 @@ function Map({ locations, selectedLocation }) {
       {locations.map((location) => (
         <Marker key={location.name}
                 position={location.coordinates}
-                ref={(r) => markers.current[location.coordinates] = r}>
+                ref={(element) => markers.current.set(location.coordinates, element)}>
           <Popup>
             <h2>{location.name}</h2>
             {location.address}
             <br />
             <br />
             {/* The filtering is a bad idea since it'll happen on every render (at the moment, O(n^2)). */}
-            <MapClubs clubs={clubs.filter((club) => club.location === location.name)} />
+            <CampusMapClubs clubs={clubs.filter((club) => club.location === location.name)} />
           </Popup>
         </Marker>
       ))}
@@ -171,7 +171,7 @@ export function Welcome() {
                           zoom={17}>
               <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-              <Map locations={locations} selectedLocation={selectedLocation}></Map>
+              <CampusMap locations={locations} selectedLocation={selectedLocation}></CampusMap>
             </MapContainer>
             <div className="map-overlay">
               <div className="map-overlay-controls">
