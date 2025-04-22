@@ -49,7 +49,6 @@ body {
 /* Hero Section */
 .hero {
   background: linear-gradient(rgba(0,40,85,0.9), rgba(0,40,85,0.8)), center/cover;
-  color: white;
   padding: 4rem 1rem;
   text-align: center;
 }
@@ -57,6 +56,7 @@ body {
 .hero-content {
   max-width: 800px;
   margin: 0 auto;
+  color: white;
 }
 
 .hero h1 {
@@ -85,6 +85,7 @@ body {
   background: var(--suffolk-gold);
   border: none;
   cursor: pointer;
+  color: white;
   transition: background 0.3s ease;
 }
 
@@ -287,8 +288,7 @@ body {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-.marker-popup-clubs {
+.marker-popup {
   padding-inline-start: 0;
   list-style: disc inside;
-
 }

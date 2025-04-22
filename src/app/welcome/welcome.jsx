@@ -3,24 +3,6 @@ import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useRef, useState } from "react";
 
-const clubs = [
-  {
-    name: "Computational Science and Mathematics Association",
-    location: "Rosalie K. Stahl Center",
-    locationInterior: "Floor 5"
-  },
-  {
-    name: "Computer Science Club",
-    location: "Rosalie K. Stahl Center",
-    locationInterior: "Floor 5"
-  },
-  {
-    name: "Math Society",
-    location: "Rosalie K. Stahl Center",
-    locationInterior: "Floor 8"
-  },
-];
-
 // https://www.suffolk.edu/visit/campus-map-directions
 const locations = [
   {
@@ -75,23 +57,98 @@ const locations = [
     address: "150, Tremont Street, Beacon Hill, Boston, Suffolk County, Massachusetts, 02111, United States",
     coordinates: [42.354878, -71.063025],
   },
-  // {
-  //   name: "Residence Hall", // ?
-  //   address: "10, West Street, Downtown Crossing, Downtown Boston, Boston, Suffolk County, Massachusetts, 02102, United States",
-  //   coordinates: [42.354446, -71.062152],
-  // },
+  {
+    name: "Residence Hall", // ?
+    address: "10, West Street, Downtown Crossing, Downtown Boston, Boston, Suffolk County, Massachusetts, 02102, United States",
+    coordinates: [42.354446, -71.062152],
+  },
   {
     name: "Modern Theatre & Residence Hall",
     address: "523,525, Washington Street, Downtown Crossing, Downtown Boston, Boston, Suffolk County, Massachusetts, 02111, United States",
     coordinates: [42.354216, -71.062240],
   },
-  {
-    name: "Athletics Fields",
-    // This the right place?
-    address: "150, Porter Street, Gove Street, East Boston, Boston, Suffolk County, Massachusetts, 02128, United States",
-    coordinates: [42.370854, -71.032417],
-  },
+  // {
+  //   name: "Athletics Fields",
+  //   // This the right place?
+  //   address: "150, Porter Street, Gove Street, East Boston, Boston, Suffolk County, Massachusetts, 02128, United States",
+  //   coordinates: [42.370854, -71.032417],
+  // },
 ];
+
+const locs = locations.reduce((m, location, i) => m.set(location.name, i), new Map())
+
+// https://www.suffolk.edu/student-life/student-involvement/clubs-organizations/clubs-at-suffolk
+const clubs = [
+  {
+    // Not incorporated.
+    name: "Computational Science and Mathematics Association",
+    location: "Rosalie K. Stahl Center",
+    locationInterior: "Floor 5"
+  },
+  {
+    name: "Computer Science Club",
+    location: "Rosalie K. Stahl Center",
+    locationInterior: "Floor 5"
+  },
+  {
+    name: "Math Society",
+    location: "Rosalie K. Stahl Center",
+    locationInterior: "Floor 8"
+  },
+  {
+    name: "Finance and Investing Club",
+    location: "Rosalie K. Stahl Center"
+  }
+];
+
+// https://www.suffolk.edu/student-life/housing-dining/dining-options
+const dining = [
+  {
+    name: "150 Tremont Café",
+    location: "Michael S. & Larry E. Smith Residence Hall",
+  },
+  {
+    name: "Café 73",
+    location: "Rosalie K. Stahl Center",
+  },
+  {
+    name: "Miller Café",
+    location: "Nathan R. Miller Residence Hall",
+  },
+  {
+    name: "Smith Café",
+    location: "Michael S. & Larry E. Smith Residence Hall",
+  },
+  {
+    name: "Sargent Café",
+    location: "David J. Sargent Hall",
+  },
+  {
+    name: "One Court Café",
+    location: "Ames Building Residence Hall",
+  },
+  {
+    name: "Market at Sawyer",
+    location: "Mildred F. Sawyer Library",
+  }
+];
+
+const landmarks = locations
+  .map((location) => ({
+    name: location.name,
+    location: location.name
+  }))
+  .concat(clubs)
+  .concat(dining)
+  .reduce((m, mark) => m.set(mark.name, mark.location), new Map());
+
+function clubText(name, location) {
+  if (location) {
+    return `${name} (${location})`;
+  }
+
+  return name;
+}
 
 function CampusMapClubs({ clubs }) {
   if (clubs.length === 0) {
@@ -101,11 +158,28 @@ function CampusMapClubs({ clubs }) {
   return (
     <div>
       <b>Clubs:</b>
-      <ul className="marker-popup-clubs">
+      <ul className="marker-popup">
         {clubs.map((club) => (
           <li key={club.name}>
-            {club.name} ({club.locationInterior})
+            {clubText(club.name, club.locationInterior)}
           </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+function CampusMapDining({ dining }) {
+  if (dining.length === 0) {
+    return null;
+  }
+
+  return (
+    <div>
+      <b>Dining:</b>
+      <ul className="marker-popup">
+        {dining.map((dining) => (
+          <li key={dining.name}>{dining.name}</li>
         ))}
       </ul>
     </div>
@@ -136,10 +210,17 @@ function CampusMap({ locations, selectedLocation }) {
             <br />
             {/* The filtering is a bad idea since it'll happen on every render (at the moment, O(n^2)). */}
             <CampusMapClubs clubs={clubs.filter((club) => club.location === location.name)} />
+            <CampusMapDining dining={dining.filter((dining) => dining.location === location.name)} />
           </Popup>
         </Marker>
       ))}
     </>
+  );
+}
+
+function searchOption(key, name, location) {
+  return (
+    <option key={key} value={name}>{location}</option>
   );
 }
 
@@ -149,24 +230,37 @@ export function Welcome() {
   return (
     <div>
       <nav className="navbar">
-        <img src={iconURL} alt="Suffolk University Logo" className="logo" />
+        <a href="/">
+          <img src={iconURL} alt="Suffolk University Logo" className="logo" />
+        </a>
       </nav>
       <section className="hero">
         <div className="hero-content">
           <h1>Explore Suffolk University Campus</h1>
           <p>Your interactive guide to navigating campus life</p>
-          <div className="search-container">
-            <input type="text" placeholder="Search buildings, dining, or clubs..." />
-            <button className="search-btn"><i className="fas fa-search"></i></button>
-          </div>
         </div>
+        <form className="search-container" action={(data) => setSelectedLocation(locations[locs.get(landmarks.get(data.get("query")))]?.coordinates)}>
+          <input className="form-control"
+                 name="query"
+                 placeholder="Search buildings, clubs, or dining..."
+                 list="searchOptions" />
+          <button className="search-btn">
+            <i className="fas fa-search" />
+          </button>
+          <datalist id="searchOptions">
+            {locations.map((location) => searchOption(location.name, location.name, location.address))}
+            {clubs.map((club) => searchOption(club.name, club.name, club.location))}
+            {dining.map((dining) => searchOption(dining.name, dining.name, dining.location))}
+          </datalist>
+        </form>
       </section>
       <main className="container">
         <section className="map-preview">
           <h2>Campus Map Overview</h2>
           <div className="map-wrapper">
             {/* .leaflet-container doesn't seem to be part of the public API */}
-            <MapContainer className="map-container"
+            <MapContainer id="map"
+                          className="map-container"
                           center={locations[0].coordinates}
                           zoom={17}>
               <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -184,7 +278,7 @@ export function Welcome() {
                   <ul className="dropdown-menu">
                     {clubs.map((club) => (
                       <li className="dropdown-item" key={club.name}>
-                        <button onClick={() => setSelectedLocation(locations.find((location) => location.name === club.location).coordinates)}>
+                        <button onClick={() => setSelectedLocation(locations[locs.get(club.location)]?.coordinates)}>
                           {club.name}
                         </button>
                       </li>
@@ -229,7 +323,7 @@ export function Welcome() {
           </article>
         </section>
         <div className="action-buttons">
-          <button className="btn primary">View Live Map</button>
+          <a className="btn primary" href="/#map">View Live Map</a>
           <button className="btn secondary">Club Registration</button>
           <button className="btn outline">Events Calendar</button>
           <button className="btn outline">Get Directions</button>
