@@ -5,7 +5,8 @@
   "scripts": {
     "build": "react-router build",
     "dev": "react-router dev",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postbuild": "cp build/client/index.html build/client/404.html"
   },
   "dependencies": {
     "@react-router/node": "^7.5.0",
